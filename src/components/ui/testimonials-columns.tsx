@@ -29,7 +29,7 @@ export const TestimonialsColumn = (props: {
       >
         {[...new Array(2)].map((_, index) => (
           <React.Fragment key={index}>
-            {props.testimonials.map(({ text, image, name, role }, i) => (
+            {props.testimonials.map(({ text, image, name, role, service }, i) => (
               <div
                 className="rounded-2xl border border-border bg-card p-6 shadow-card hover:shadow-soft transition-shadow duration-300"
                 key={`${index}-${i}`}
