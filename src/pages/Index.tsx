@@ -63,7 +63,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="pb-16 lg:pb-0">
+    <div>
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">

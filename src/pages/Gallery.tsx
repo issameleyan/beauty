@@ -39,23 +39,32 @@ const GalleryPage = () => {
   const filtered = activeFilter === 'all' ? galleryItems : galleryItems.filter(i => i.category === activeFilter);
 
   return (
-    <div className="pt-24 pb-16 lg:pb-0">
-      <section className="py-16 bg-gradient-cta text-primary-foreground text-center">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('معرض أعمالنا', 'Our Portfolio')}</h1>
-          <p className="text-lg text-primary-foreground/80">{t('كل صورة تحكي قصة نجاح', 'Every photo tells a success story')}</p>
+    <div>
+      {/* Hero with background image */}
+      <section className="relative section-padding text-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=1974&auto=format&fit=crop"
+            alt=""
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/80 to-accent/70" />
+        </div>
+        <div className="container-tight relative z-10 py-8 md:py-12">
+          <h1 className="text-4xl font-bold text-primary-foreground md:text-5xl">{t('معرض أعمالنا', 'Our Portfolio')}</h1>
+          <p className="mt-4 text-lg text-primary-foreground/90">{t('كل صورة تحكي قصة نجاح', 'Every photo tells a success story')}</p>
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="container mx-auto px-4">
+      <section className="section-padding">
+        <div className="container-tight">
           {/* Filters */}
           <div className="flex flex-wrap gap-3 justify-center mb-10">
             {filters.map(f => (
               <button
                 key={f.id}
                 onClick={() => setActiveFilter(f.id)}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${activeFilter === f.id ? 'bg-gradient-cta text-primary-foreground' : 'bg-secondary text-muted-foreground hover:bg-muted'}`}
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${activeFilter === f.id ? 'gradient-cta text-primary-foreground' : 'bg-secondary text-foreground hover:bg-muted'}`}
               >
                 {f.label}
               </button>
@@ -76,7 +85,7 @@ const GalleryPage = () => {
 
           <div className="text-center mt-12">
             <h3 className="text-2xl font-bold text-foreground mb-4">{t('عجبك شغلنا؟ احجزي موعدك الآن', 'Like our work? Book now')}</h3>
-            <Button asChild size="lg" className="bg-gradient-cta text-primary-foreground">
+            <Button asChild size="lg" className="gradient-cta border-0 text-primary-foreground hover:opacity-90">
               <Link to="/booking">{t('احجزي الآن', 'Book Now')}</Link>
             </Button>
           </div>
