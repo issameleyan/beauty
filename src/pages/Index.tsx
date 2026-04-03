@@ -101,7 +101,7 @@ const Index = () => {
             <Button asChild size="lg" className="bg-primary-foreground text-foreground hover:bg-primary-foreground/90 text-base px-8">
               <Link to="/booking">{t('احجزي موعدك الآن', 'Book Your Appointment')}</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 text-base px-8">
+            <Button asChild size="lg" className="border-2 border-primary-foreground/40 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground hover:text-foreground text-base px-8 transition-colors">
               <a href="https://wa.me/966500000000" target="_blank" rel="noopener noreferrer">
                 <FaWhatsapp className="h-5 w-5 me-2" />
                 {t('تواصلي عبر واتساب', 'Chat on WhatsApp')}
