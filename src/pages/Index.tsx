@@ -282,7 +282,7 @@ const Index = () => {
                 {t('واتساب', 'WhatsApp')}
               </a>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 px-8">
+            <Button asChild size="lg" className="border-2 border-primary-foreground/40 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground hover:text-foreground px-8 transition-colors">
               <a href="tel:+966500000000">{t('اتصلي فينا', 'Call Us')}</a>
             </Button>
           </div>
