@@ -5,6 +5,8 @@ import { Star, Sparkles, ShieldCheck, Award, Heart, Scissors, Palette, Smile, Ha
 import { FaWhatsapp } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import heroImg from '@/assets/hero-salon.jpg';
+import { TestimonialsColumn } from '@/components/ui/testimonials-columns';
+import FeatureCards from '@/components/ui/feature-cards';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -31,12 +33,20 @@ const Index = () => {
   ];
 
   const testimonials = [
-    { name: t('نورة', 'Noura'), service: t('صبغة شعر', 'Hair Color'), rating: 5, text: t('صبغتي طلعت بالضبط زي ما بدي — اللون طبيعي ويدوم فترة طويلة بدون ما يبهت. والبنات اهتمامهم فوق الوصف.', 'My hair color turned out exactly as I wanted — natural and long-lasting. The staff attention was beyond description.') },
-    { name: t('سارة', 'Sara'), service: t('مكياج عرس', 'Bridal Makeup'), rating: 5, text: t('مكياج عرسي كان أحلى شي — كل البنات سألوني وين سويتيه. ثابت طول الليل وما احتجت أعدل شي.', 'My bridal makeup was gorgeous — everyone asked where I got it done. Lasted all night without any touch-ups.') },
-    { name: t('لمى', 'Lama'), service: t('فيشل وتنظيف', 'Facial'), rating: 5, text: t('بشرتي صارت تنور من أول جلسة — المكان نظيف ومرتب والجو مريح جداً. صرت عميلة دائمة.', 'My skin started glowing from the first session — the place is clean, organized, and very comfortable. I became a regular.') },
-    { name: t('دانة', 'Dana'), service: t('كيراتين', 'Keratin'), rating: 5, text: t('شعري كان جاف ومتقصف وبعد الكيراتين صار ناعم ولامع. النتيجة استمرت شهور وأنا مبسوطة جداً.', 'My hair was dry and damaged, after keratin it became smooth and shiny. Results lasted months and I\'m very happy.') },
-    { name: t('هند', 'Hind'), service: t('حمام مغربي', 'Moroccan Bath'), rating: 5, text: t('أحسن حمام مغربي جربته — بشرتي طلعت ناعمة كالحرير والجو كان استرخاء كامل. أسعار معقولة والنتيجة تستاهل.', 'Best Moroccan bath I\'ve ever had — skin came out silky smooth in a totally relaxing atmosphere. Fair prices and worth every penny.') },
+    { name: t('نورة', 'Noura'), service: t('صبغة شعر', 'Hair Color'), text: t('صبغتي طلعت بالضبط زي ما بدي — اللون طبيعي ويدوم فترة طويلة بدون ما يبهت. والبنات اهتمامهم فوق الوصف.', 'My hair color turned out exactly as I wanted — natural and long-lasting. The staff attention was beyond description.'), image: 'https://randomuser.me/api/portraits/women/1.jpg' },
+    { name: t('سارة', 'Sara'), service: t('مكياج عرس', 'Bridal Makeup'), text: t('مكياج عرسي كان أحلى شي — كل البنات سألوني وين سويتيه. ثابت طول الليل وما احتجت أعدل شي.', 'My bridal makeup was gorgeous — everyone asked where I got it done. Lasted all night without any touch-ups.'), image: 'https://randomuser.me/api/portraits/women/2.jpg' },
+    { name: t('لمى', 'Lama'), service: t('فيشل وتنظيف', 'Facial'), text: t('بشرتي صارت تنور من أول جلسة — المكان نظيف ومرتب والجو مريح جداً. صرت عميلة دائمة.', 'My skin started glowing from the first session — the place is clean, organized, and very comfortable. I became a regular.'), image: 'https://randomuser.me/api/portraits/women/3.jpg' },
+    { name: t('دانة', 'Dana'), service: t('كيراتين', 'Keratin'), text: t('شعري كان جاف ومتقصف وبعد الكيراتين صار ناعم ولامع. النتيجة استمرت شهور وأنا مبسوطة جداً.', 'My hair was dry and damaged, after keratin it became smooth and shiny. Results lasted months and I\'m very happy.'), image: 'https://randomuser.me/api/portraits/women/4.jpg' },
+    { name: t('هند', 'Hind'), service: t('حمام مغربي', 'Moroccan Bath'), text: t('أحسن حمام مغربي جربته — بشرتي طلعت ناعمة كالحرير والجو كان استرخاء كامل. أسعار معقولة والنتيجة تستاهل.', 'Best Moroccan bath I\'ve ever had — skin came out silky smooth in a totally relaxing atmosphere. Fair prices and worth every penny.'), image: 'https://randomuser.me/api/portraits/women/5.jpg' },
+    { name: t('ريم', 'Reem'), service: t('مانيكير', 'Manicure'), text: t('أظافري طلعت حلوة ومرتبة — الألوان تدوم أسابيع والخبيرة كانت دقيقة جداً في شغلها. بنصح فيهم بقوة.', 'My nails looked beautiful and neat — colors lasted weeks and the specialist was very precise. Highly recommend.'), image: 'https://randomuser.me/api/portraits/women/6.jpg' },
+    { name: t('منال', 'Manal'), service: t('مكياج سهرة', 'Evening Makeup'), text: t('كل ما احتاج مكياج لمناسبة أروح عندهم — يفهمون وش أبي بالضبط والنتيجة دايم تبهرني.', 'Whenever I need makeup for an event, I go to them — they understand exactly what I want and the results always amaze me.'), image: 'https://randomuser.me/api/portraits/women/7.jpg' },
+    { name: t('عبير', 'Abeer'), service: t('قص وتصفيف', 'Cut & Style'), text: t('أخيراً لقيت صالون يقص شعري صح! القصة طلعت بالضبط زي الصورة اللي وريتها. ما بغير صالون أبداً.', 'Finally found a salon that cuts my hair right! The cut came out exactly like the photo I showed. Never switching salons.'), image: 'https://randomuser.me/api/portraits/women/8.jpg' },
+    { name: t('لطيفة', 'Latifa'), service: t('تنظيف بشرة', 'Skin Cleansing'), text: t('بشرتي كانت تعبانة من الشمس وبعد جلستين صارت نضرة ومشرقة. المنتجات اللي يستخدمونها فعلاً فرقت معي.', 'My skin was sun-damaged and after two sessions it became fresh and radiant. The products they use truly made a difference.'), image: 'https://randomuser.me/api/portraits/women/9.jpg' },
   ];
+
+  const firstColumn = testimonials.slice(0, 3);
+  const secondColumn = testimonials.slice(3, 6);
+  const thirdColumn = testimonials.slice(6, 9);
 
   const teamMembers = [
     { name: t('خبيرة ريم', 'Reem'), role: t('أخصائية شعر وصبغات', 'Hair & Color Specialist'), experience: t('٨ سنوات خبرة', '8 years experience'), img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=300&h=300&fit=crop&crop=face' },
@@ -54,12 +64,13 @@ const Index = () => {
     { service: t('كيراتين برازيلي', 'Brazilian Keratin'), price: t('٥٠٠ ر.س', '500 SAR') },
   ];
 
-  const whyUsItems = [
-    { title: t('منتجات عالمية أصلية', 'Original Global Products'), desc: t('نستخدم ماركات مثل Olaplex وKerastase وMAC — منتجات أصلية ١٠٠٪ عشان نتيجتك تكون مضمونة', 'We use brands like Olaplex, Kerastase, and MAC — 100% authentic for guaranteed results') },
-    { title: t('خبيرات بخبرة +٥ سنوات', 'Experts with 5+ Years'), desc: t('كل وحدة من فريقنا متخصصة بمجالها — مش بس موظفة، هي خبيرة تفهم شعرك وبشرتك', 'Each team member specializes in their field — not just staff, but experts who understand your hair and skin') },
-    { title: t('تعقيم كامل بعد كل عميلة', 'Full Sterilization'), desc: t('أدوات معقمة ومغلفة — نظافتك وسلامتك أولويتنا قبل أي شي ثاني', 'Sterilized and sealed tools — your hygiene and safety is our top priority') },
-    { title: t('خصوصية تامة وأجواء مريحة', 'Full Privacy & Comfort'), desc: t('المكان مصمم عشان تحسين بالراحة والخصوصية — كأنك في بيتك بس بخدمة فندقية', 'Designed for your comfort and privacy — like being at home with five-star service') },
-    { title: t('أسعار واضحة بدون مفاجآت', 'Clear Pricing, No Surprises'), desc: t('نحددلك السعر قبل ما نبدأ — ما في تكاليف مخفية ولا مفاجآت بالفاتورة', 'We tell you the price before we start — no hidden costs or surprise bills') },
+  const whyUsFeatures = [
+    { title: t('منتجات عالمية أصلية', 'Original Global Products'), description: t('نستخدم ماركات مثل Olaplex وKerastase وMAC — منتجات أصلية ١٠٠٪ عشان نتيجتك تكون مضمونة', 'We use brands like Olaplex, Kerastase, and MAC — 100% authentic for guaranteed results'), icon: <Award className="h-6 w-6" /> },
+    { title: t('خبيرات بخبرة +٥ سنوات', 'Experts with 5+ Years'), description: t('كل وحدة من فريقنا متخصصة بمجالها — مش بس موظفة، هي خبيرة تفهم شعرك وبشرتك', 'Each team member specializes in their field — not just staff, but experts who understand your hair and skin'), icon: <Sparkles className="h-6 w-6" /> },
+    { title: t('تعقيم كامل بعد كل عميلة', 'Full Sterilization'), description: t('أدوات معقمة ومغلفة — نظافتك وسلامتك أولويتنا قبل أي شي ثاني', 'Sterilized and sealed tools — your hygiene and safety is our top priority'), icon: <ShieldCheck className="h-6 w-6" /> },
+    { title: t('خصوصية تامة وأجواء مريحة', 'Full Privacy & Comfort'), description: t('المكان مصمم عشان تحسين بالراحة والخصوصية — كأنك في بيتك بس بخدمة فندقية', 'Designed for your comfort and privacy — like being at home with five-star service'), icon: <Heart className="h-6 w-6" /> },
+    { title: t('أسعار واضحة بدون مفاجآت', 'Clear Pricing, No Surprises'), description: t('نحددلك السعر قبل ما نبدأ — ما في تكاليف مخفية ولا مفاجآت بالفاتورة', 'We tell you the price before we start — no hidden costs or surprise bills'), icon: <Star className="h-6 w-6" /> },
+    { title: t('نتائج مضمونة من أول زيارة', 'Guaranteed Results'), description: t('ما نرضى إلا لما ترضين — إذا ما عجبتك النتيجة، نعيدها لك بدون أي تكلفة إضافية', "We're not satisfied until you are — if you're not happy with the result, we redo it at no extra cost"), icon: <Scissors className="h-6 w-6" /> },
   ];
 
   return (
@@ -105,7 +116,10 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {trustItems.map((item, i) => (
-              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="flex flex-col items-center text-center p-6 bg-background rounded-2xl shadow-card">
+              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i}
+                whileHover={{ y: -4, scale: 1.03 }}
+                className="flex flex-col items-center text-center p-6 bg-background rounded-2xl shadow-card transition-shadow hover:shadow-soft cursor-default"
+              >
                 <div className="text-primary mb-3">{item.icon}</div>
                 <span className="text-sm font-bold text-foreground">{item.text}</span>
               </motion.div>
@@ -123,11 +137,14 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((svc, i) => (
-              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="group p-6 bg-card rounded-2xl shadow-card hover:shadow-soft transition-all duration-300 border border-border/50">
+              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i}
+                whileHover={{ y: -6, scale: 1.02 }}
+                className="group p-6 bg-card rounded-2xl shadow-card hover:shadow-soft transition-all duration-300 border border-border/50 hover:border-primary/30"
+              >
                 <div className="text-primary mb-4 group-hover:scale-110 transition-transform">{svc.icon}</div>
                 <h3 className="text-lg font-bold text-foreground mb-2">{svc.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-4">{svc.desc}</p>
-                <Button asChild variant="ghost" className="text-primary hover:text-rose-gold-dark p-0 h-auto font-bold text-sm">
+                <Button asChild variant="ghost" className="text-primary hover:text-primary/80 p-0 h-auto font-bold text-sm">
                   <Link to="/booking">{t('احجزي الآن ←', 'Book Now →')}</Link>
                 </Button>
               </motion.div>
@@ -154,7 +171,10 @@ const Index = () => {
               'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400&h=400&fit=crop',
               'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400&h=400&fit=crop',
             ].map((img, i) => (
-              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i * 0.5} className="group relative aspect-square rounded-2xl overflow-hidden">
+              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i * 0.5}
+                whileHover={{ scale: 1.05 }}
+                className="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer"
+              >
                 <img src={img} alt={`${t('عمل', 'Work')} ${i + 1}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
                 <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/30 transition-colors flex items-center justify-center">
                   <span className="text-primary-foreground font-bold opacity-0 group-hover:opacity-100 transition-opacity">{t('شوفي التفاصيل', 'View Details')}</span>
@@ -163,32 +183,19 @@ const Index = () => {
             ))}
           </div>
           <div className="text-center mt-8">
-            <Button asChild className="bg-gradient-cta text-primary-foreground">
+            <Button asChild className="gradient-cta border-0 text-primary-foreground hover:opacity-90">
               <Link to="/gallery">{t('عجبك اللوك؟ شوفي المزيد', 'Like what you see? View more')}</Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* WHY US */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">{t('ليش لمسة جمال؟', 'Why Lamsat Jamal?')}</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {whyUsItems.map((item, i) => (
-              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="p-6 rounded-2xl border border-border/50 bg-card">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                  <ShieldCheck className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="text-base font-bold text-foreground mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* WHY US — Interactive Feature Cards */}
+      <FeatureCards
+        heading={t('ليش لمسة جمال؟', 'Why Lamsat Jamal?')}
+        subheading={t('اللي يميزنا عن غيرنا', 'What sets us apart')}
+        features={whyUsFeatures}
+      />
 
       {/* PRICING */}
       <section className="py-20 bg-secondary">
@@ -199,15 +206,18 @@ const Index = () => {
           </div>
           <div className="max-w-2xl mx-auto">
             <div className="bg-background rounded-2xl shadow-card overflow-hidden">
-              <div className="grid grid-cols-2 bg-primary text-primary-foreground px-6 py-4 font-bold text-sm">
+              <div className="grid grid-cols-2 gradient-cta text-primary-foreground px-6 py-4 font-bold text-sm">
                 <span>{t('الخدمة', 'Service')}</span>
                 <span className="text-end">{t('تبدأ من', 'Starting from')}</span>
               </div>
               {pricingItems.map((item, i) => (
-                <div key={i} className={`grid grid-cols-2 px-6 py-4 text-sm ${i % 2 ? 'bg-secondary/50' : ''}`}>
+                <motion.div key={i}
+                  whileHover={{ backgroundColor: 'hsl(var(--primary) / 0.05)' }}
+                  className={`grid grid-cols-2 px-6 py-4 text-sm transition-colors ${i % 2 ? 'bg-secondary/50' : ''}`}
+                >
                   <span className="font-medium text-foreground">{item.service}</span>
                   <span className="text-end text-primary font-bold">{item.price}</span>
-                </div>
+                </motion.div>
               ))}
             </div>
             <p className="text-center text-sm text-muted-foreground mt-4">
@@ -217,27 +227,17 @@ const Index = () => {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
+      {/* TESTIMONIALS — Scrolling Columns */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">{t('عميلاتنا يحكوا', 'Our Clients Speak')}</h2>
+            <p className="text-muted-foreground text-lg">{t('شوفي وش يقولون عنا', 'See what they say about us')}</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {testimonials.map((test, i) => (
-              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="p-6 bg-card rounded-2xl shadow-card border border-border/50">
-                <div className="flex gap-1 mb-3">
-                  {Array.from({ length: test.rating }).map((_, j) => (
-                    <Star key={j} className="h-4 w-4 text-accent fill-accent" />
-                  ))}
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4">"{test.text}"</p>
-                <div className="border-t border-border pt-3">
-                  <p className="font-bold text-sm text-foreground">{test.name}</p>
-                  <p className="text-xs text-muted-foreground">{test.service}</p>
-                </div>
-              </motion.div>
-            ))}
+          <div className="flex justify-center gap-6 max-h-[600px] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]">
+            <TestimonialsColumn testimonials={firstColumn} duration={15} className="hidden md:block" />
+            <TestimonialsColumn testimonials={secondColumn} duration={19} />
+            <TestimonialsColumn testimonials={thirdColumn} duration={17} className="hidden lg:block" />
           </div>
         </div>
       </section>
@@ -250,7 +250,10 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {teamMembers.map((member, i) => (
-              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i} className="text-center bg-background rounded-2xl shadow-card p-6 border border-border/50">
+              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={i}
+                whileHover={{ y: -6 }}
+                className="text-center bg-background rounded-2xl shadow-card p-6 border border-border/50 transition-all hover:shadow-soft hover:border-primary/30"
+              >
                 <img src={member.img} alt={member.name} className="w-24 h-24 rounded-full object-cover mx-auto mb-4 ring-2 ring-primary/20" loading="lazy" />
                 <h3 className="font-bold text-foreground text-sm">{member.name}</h3>
                 <p className="text-xs text-muted-foreground mb-1">{member.role}</p>
@@ -265,7 +268,7 @@ const Index = () => {
       </section>
 
       {/* STRONG CTA */}
-      <section className="py-20 bg-gradient-cta text-primary-foreground">
+      <section className="py-20 gradient-cta text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">{t('جمالك يستاهل الأفضل — احجزي موعدك الآن', 'You Deserve the Best — Book Now')}</h2>
           <p className="text-lg text-primary-foreground/80 mb-8">{t('مواعيد مرنة — حجز سهل — نتائج مضمونة', 'Flexible scheduling — easy booking — guaranteed results')}</p>
