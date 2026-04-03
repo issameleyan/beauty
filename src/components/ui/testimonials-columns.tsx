@@ -45,7 +45,7 @@ export const TestimonialsColumn = (props: {
                   />
                   <div>
                     <p className="text-sm font-bold text-foreground">{name}</p>
-                    <p className="text-xs text-muted-foreground">{role}</p>
+                    <p className="text-xs text-muted-foreground">{role || service}</p>
                   </div>
                 </div>
               </div>
