@@ -47,11 +47,13 @@
     --cream-dark: 30 20% 92%;
     --warm-white: 30 30% 99%;
 
-    --gradient-hero: linear-gradient(135deg, hsl(350 45% 65% / 0.9), hsl(340 60% 25% / 0.8));
-    --gradient-cta: linear-gradient(135deg, hsl(350 45% 65%), hsl(340 60% 25%));
+    --hero-gradient: linear-gradient(135deg, hsl(350 45% 65% / 0.9), hsl(340 60% 25% / 0.8));
+    --cta-gradient: linear-gradient(135deg, hsl(350 45% 65%), hsl(340 60% 25%));
     --gradient-gold: linear-gradient(135deg, hsl(35 70% 50%), hsl(350 45% 65%));
     --shadow-soft: 0 4px 20px hsl(350 45% 65% / 0.1);
     --shadow-card: 0 8px 30px hsl(20 15% 15% / 0.06);
+
+    --section-alt: 30 30% 96%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -85,18 +87,18 @@
 
 @layer utilities {
   .text-gradient-primary {
-    background: var(--gradient-cta);
+    background: var(--cta-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .bg-gradient-hero {
-    background: var(--gradient-hero);
+    background: var(--hero-gradient);
   }
 
   .bg-gradient-cta {
-    background: var(--gradient-cta);
+    background: var(--cta-gradient);
   }
 
   .bg-gradient-gold {
@@ -109,5 +111,25 @@
 
   .shadow-card {
     box-shadow: var(--shadow-card);
+  }
+
+  .section-padding {
+    @apply px-4 py-16 md:px-8 md:py-24 lg:px-16;
+  }
+
+  .container-tight {
+    @apply mx-auto max-w-6xl;
+  }
+
+  .bg-section-alt {
+    background-color: hsl(var(--section-alt));
+  }
+
+  .gradient-cta {
+    background: var(--cta-gradient);
+  }
+
+  .gradient-hero {
+    background: var(--hero-gradient);
   }
 }

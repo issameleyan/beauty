@@ -1,100 +1,113 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from '@/components/ui/sheet';
 
 const Navbar = () => {
   const { lang, setLang, t } = useLanguage();
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => setIsOpen(false), [location]);
 
   const navItems = [
     { path: '/', label: t('الرئيسية', 'Home') },
     { path: '/services', label: t('خدماتنا', 'Services') },
     { path: '/gallery', label: t('أعمالنا', 'Our Work') },
-    { path: '/booking', label: t('احجزي موعد', 'Book Now') },
     { path: '/about', label: t('من نحن', 'About') },
     { path: '/contact', label: t('تواصلي معنا', 'Contact') },
   ];
 
   return (
-    <header className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled ? 'bg-background/80 backdrop-blur-xl shadow-soft' : 'bg-transparent'}`}>
-      <nav className="container mx-auto px-4">
-        <div className="flex items-center justify-between py-3 lg:py-4">
-          <Link to="/" className="text-2xl font-bold text-foreground">
-            <span className="text-gradient-primary">لمسة جمال</span>
-          </Link>
+    <header className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border">
+      <nav className="container mx-auto max-w-6xl flex items-center justify-between px-4 py-3">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2">
+          <span className="text-xl font-bold text-primary">
+            {t('لمسة جمال', 'Lamsat Jamal')}
+          </span>
+        </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-6">
-            <ul className="flex gap-6">
-              {navItems.map((item) => (
-                <li key={item.path}>
-                  <Link
-                    to={item.path}
-                    className={`text-sm font-medium transition-colors hover:text-primary ${location.pathname === item.path ? 'text-primary' : 'text-muted-foreground'}`}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <button
-              onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
-              className="text-sm font-medium px-3 py-1.5 rounded-full border border-border hover:bg-secondary transition-colors"
+        {/* Desktop links */}
+        <div className="hidden lg:flex items-center gap-6">
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`text-sm font-medium transition-colors hover:text-primary ${
+                location.pathname === item.path ? 'text-primary' : 'text-foreground'
+              }`}
             >
-              {lang === 'ar' ? 'EN' : 'عربي'}
-            </button>
-            <Button asChild className="bg-gradient-cta hover:opacity-90 text-primary-foreground">
-              <Link to="/booking">{t('احجزي موعد', 'Book Now')}</Link>
-            </Button>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="flex items-center gap-3 lg:hidden">
-            <button
-              onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
-              className="text-xs font-medium px-2 py-1 rounded-full border border-border"
-            >
-              {lang === 'ar' ? 'EN' : 'عربي'}
-            </button>
-            <button onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
+              {item.label}
+            </Link>
+          ))}
         </div>
 
-        {/* Mobile menu */}
-        {isOpen && (
-          <div className="lg:hidden pb-6 bg-background/95 backdrop-blur-xl rounded-2xl mt-2 border p-6 shadow-card">
-            <ul className="space-y-4">
-              {navItems.map((item) => (
-                <li key={item.path}>
-                  <Link
-                    to={item.path}
-                    className={`block text-base font-medium ${location.pathname === item.path ? 'text-primary' : 'text-muted-foreground'}`}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <Button asChild className="w-full mt-4 bg-gradient-cta text-primary-foreground">
-              <Link to="/booking">{t('احجزي موعد', 'Book Now')}</Link>
-            </Button>
-          </div>
-        )}
+        {/* Desktop right side */}
+        <div className="hidden lg:flex items-center gap-3">
+          <button
+            onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
+            className="rounded-md border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition-colors hover:bg-secondary"
+          >
+            {lang === 'ar' ? 'EN' : 'عربي'}
+          </button>
+          <Button asChild size="sm" className="bg-gradient-cta border-0 text-primary-foreground hover:opacity-90">
+            <Link to="/booking">{t('احجزي موعد', 'Book Now')}</Link>
+          </Button>
+        </div>
+
+        {/* Mobile toggle */}
+        <button
+          onClick={() => setMobileMenuOpen(true)}
+          className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-foreground hover:text-primary transition-colors lg:hidden"
+        >
+          <span className="sr-only">Open menu</span>
+          <Menu className="h-6 w-6" />
+        </button>
       </nav>
+
+      {/* Mobile menu using Sheet */}
+      <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+        <SheetContent side="right" className="w-[280px] sm:w-[320px] p-0">
+          <SheetHeader className="px-5 pt-5 pb-2">
+            <SheetTitle className="text-lg font-bold text-primary text-start">
+              {t('لمسة جمال', 'Lamsat Jamal')}
+            </SheetTitle>
+          </SheetHeader>
+          <div className="flex flex-col px-4 py-4 space-y-1">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`block rounded-lg px-3 py-2.5 text-base font-semibold transition-colors hover:bg-secondary ${
+                  location.pathname === item.path ? 'text-primary bg-secondary/50' : 'text-foreground'
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <div className="pt-4 border-t border-border mt-2 flex flex-col gap-3">
+              <button
+                onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
+                className="self-start rounded-md border border-border px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+              >
+                {lang === 'ar' ? 'EN' : 'عربي'}
+              </button>
+              <Button asChild size="default" className="w-full bg-gradient-cta border-0 text-primary-foreground hover:opacity-90">
+                <Link to="/booking" onClick={() => setMobileMenuOpen(false)}>
+                  {t('احجزي موعد', 'Book Now')}
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
     </header>
   );
 };

@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import StickyMobileBar from "@/components/StickyMobileBar";
+import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import ServicesPage from "./pages/Services";
 import GalleryPage from "./pages/Gallery";
@@ -25,6 +26,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <Navbar />
           <Routes>
             <Route path="/" element={<Index />} />
