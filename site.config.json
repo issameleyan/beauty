@@ -1,0 +1,51 @@
+{
+  "business": {
+    "name": "",
+    "name_en": "",
+    "category": "",
+    "slogan": "",
+    "description": "",
+    "phone": "",
+    "whatsapp": "",
+    "email": "",
+    "address": "",
+    "city": "",
+    "country": "",
+    "google_maps_url": "",
+    "google_maps_embed": "",
+    "working_hours": {
+      "saturday_thursday": "",
+      "friday": ""
+    }
+  },
+  "hero": {
+    "headline": "",
+    "subheadline": "",
+    "cta_text": "",
+    "cta_url": ""
+  },
+  "about": {
+    "title": "",
+    "paragraphs": ["", ""]
+  },
+  "services": [],
+  "features": [],
+  "testimonials": [],
+  "footer": {
+    "copyright": "",
+    "social": {
+      "instagram": "",
+      "twitter": ""
+    }
+  },
+  "seo": {
+    "title": "",
+    "description": "",
+    "keywords": ""
+  },
+  "theme": {
+    "primary_color": "#000000",
+    "secondary_color": "#000000",
+    "accent_color": "#000000"
+  }
+}
